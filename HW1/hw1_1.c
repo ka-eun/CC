@@ -7,8 +7,7 @@
 int main(void) {
 	int a[MAX]; /* Array for Integer */
 	int my_rank; /* my process rank */
-	int comm_sz; /* number of processes */
-	int source; /* rank of sender */
+	int comm_sz; /* number of processes *
 	int i = 0; /* iteration loop variable */
 	int x, high, low; /* for range of devided array */
 	int local_sum = 0;
@@ -22,7 +21,8 @@ int main(void) {
 
 	if (my_rank==0) {
 		for (i = 0; i < MAX; i++) {
-			a[i] = rand()%1000; /* allocate random integer around 0~999 */
+			a[i] = i;
+			// a[i] = rand()%1000; /* allocate random integer around 0~999 */
 		}
 		for (i = 1; i < comm_sz; i++) {
 			MPI_Send(&a, MAX, MPI_INT, i, 0, MPI_COMM_WORLD);
