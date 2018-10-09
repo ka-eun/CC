@@ -4,7 +4,7 @@
 #include <time.h>
 #define MAX 1000
 
-int main(int argc, char *argv[]) {
+int main(void) {
 	int a[MAX]; /* Array for Integer */
 	int my_rank; /* my process rank */
 	int comm_sz; /* number of processes */
@@ -25,11 +25,11 @@ int main(int argc, char *argv[]) {
 			a[i] = rand()%1000; /* allocate random integer around 0~999 */
 		}
 		for (i = 1; i < comm_sz; i++) {
-			MPI_Send(a, MAX, MPI_INT, i, 0, MPI_COMM_WORLD);
+			MPI_Send(&a, MAX, MPI_INT, i, 0, MPI_COMM_WORLD);
 		}
 	}
 	else {
-		MPI_Recv(a, MAX, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+		MPI_Recv(&a, MAX, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 	}
 
 
@@ -42,11 +42,11 @@ int main(int argc, char *argv[]) {
 	}
 
 	if (my_rank != 0) {
-		MPI_Send(local_sum, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
+		MPI_Send(&local_sum, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
 	}
 	else {
 		for (int i = 1; i < comm_sz; i++) {
-			MPI_Recv(local_sum, 1, MPI_INT, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+			MPI_Recv(&local_sum, 1, MPI_INT, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 			global_sum += local_sum;
 		}
 
