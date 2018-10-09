@@ -4,7 +4,7 @@
 #include <time.h>
 #define MAX 1000
 
-int main(void) {
+int main(int argc, char *argv[]) {
 	int a[MAX]; /* Array for Integer */
 	int my_rank; /* my process rank */
 	int comm_sz; /* number of processes */
