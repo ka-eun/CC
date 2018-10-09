@@ -45,6 +45,7 @@ int main(void) {
 		MPI_Send(&local_sum, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
 	}
 	else {
+		global_sum += local_sum;
 		for (int i = 1; i < comm_sz; i++) {
 			MPI_Recv(&local_sum, 1, MPI_INT, i, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 			global_sum += local_sum;
