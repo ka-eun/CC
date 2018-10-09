@@ -7,7 +7,7 @@
 int main(void) {
 	int a[MAX]; /* Array for Integer */
 	int my_rank; /* my process rank */
-	int comm_sz; /* number of processes *
+	int comm_sz; /* number of processes */
 	int i = 0; /* iteration loop variable */
 	int x, high, low; /* for range of devided array */
 	int local_sum = 0;
