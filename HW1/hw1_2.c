@@ -21,25 +21,28 @@ int main(void) {
 	MPI_Comm_rank(MPI_COMM_WORLD, &my_rank); /* allocate each process numbers */
 	MPI_Comm_size(MPI_COMM_WORLD, &comm_sz); /* allocate size to comm_sz */
 
+	x = MAX / comm_sz;
+
 	if (my_rank == 0) {
 		for (i = 0; i < MAX; i++) {
 			a[i] = i;
 			// a[i] = rand()%1000; /* allocate random integer around 0~999 */
 		}
-		MPI_Scatter(&a, MAX, MPI_INT, &a, MAX, MPI_INT, 0, MPI_COMM_WORLD);
+		MPI_Scatter(&a, x, MPI_INT, &a, x, MPI_INT, 0, MPI_COMM_WORLD);
 	}
 
-	x = MAX / comm_sz;
-
-	for (i = 0; i <x; i++) {
-		local_sum += a[i];
+	for (i = 0; i<x; i++) {
+		local_sum += a[i]; // compute local_sum in each process
 	}
 
-	MPI_Allgather(&local_sum, comm_sz, MPI_INT, &local_sum_array, comm_sz, MPI_INT, MPI_COMM_WORLD);
+	MPI_Allgather(&local_sum, 1, MPI_INT, &local_sum_array, 1, MPI_INT, MPI_COMM_WORLD);
 
 	for (i = 0; i < x; i++) {
 		b[i] = 0;
-		for (j = 0; j < i; j++) b[i] += a[j];
+		for (j = 0; j <= i; j++) b[i] += a[j];
+	}
+
+	for (i = 0; i < x; i++) {
 		for (j = 0; j < my_rank; j++) b[i] += local_sum_array[j];
 	}
 
