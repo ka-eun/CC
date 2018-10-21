@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <string.h>
+#include <mpi.h>
+
+int main(void) {
+
+	int rank, size;
+	int token, i;
+	int src, dst;
+
+	MPI_Init(NULL, NULL);
+	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+	MPI_Comm_size(MPI_COMM_WORLD, &size);
+
+	src = (rank + size - 1) % size;
+	dst = (rank + 1) % size;
+
+	if (rank == 0) token = 1;
+	if (rank == 0) {
+		MPI_Send(&token, 1, MPI_INT, dst, 5, MPI_COMM_WORLD);
+		MPI_Recv(&token, 1, MPI_INT, src, 5, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+		prinf("Valud of returned token : %d\n", token);
+	}
+	else {
+		MPI_Recv(&token, 1, MPI_INT, src, 5, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+		token++;
+		MPI_Send(&token, 1, MPI_INT, dst, 5, MPI_COMM_WORLD);
+	}
+
+	MPI_Finalize();
+	return 0;
+
+}
