@@ -1,0 +1,6 @@
+Alice	Bob Cheole Zudi
+Bob	Alice Emma
+Bob	Alice Emma Fred
+Cheole	Alice
+David	George Herry
+Herry	David
