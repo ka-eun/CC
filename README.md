@@ -1,3 +1,8 @@
 # Cloud Computing
 
->HW1 : sample MPI_Programming
+Shared Memory Programming
+
+>MPI_Programming   
+>PTHREAD   
+>OPENMP   
+>HADOOP/HDFS
