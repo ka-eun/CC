@@ -1,4 +1,4 @@
-Compilation:
+Compilation:   
 mpicc test.c -o test   
    
 Execution:   
