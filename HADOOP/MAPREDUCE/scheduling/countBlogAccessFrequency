@@ -1,0 +1,23 @@
+// count the frequency of blog accessing
+// each access should be valid
+
+Job1{
+  MyMapper1:
+    // 접속로그 처리
+    // 필터링
+  MyReducer1:
+    // key = 블로그id와 요구처ip주소
+    emit(list(ID, ip), 1)
+}
+
+// shuffle & sort -> 중복제거
+
+Job2{
+  MyMapper2:
+    // 그대로 출력
+  MyReducer2:
+    // (URL, ip)로 추출
+    // count for eah URL 
+    // (URL, list(ip))
+    emit(URL, count(list(ip)))
+}
