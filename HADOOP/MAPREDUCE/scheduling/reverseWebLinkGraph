@@ -1,0 +1,6 @@
+myMapper:
+  // (target, source) for each link to target URL 
+ 
+myReducer:
+  // concat list of all URL with target
+  // emit (target, list(source))
