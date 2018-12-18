@@ -1,0 +1,6 @@
+MyMapper:
+  // logs of web page requests and outputs (URL, 1)
+ 
+ MyReducer:
+  // adds all values for each same URL
+  // emit (URL, total_count) 
